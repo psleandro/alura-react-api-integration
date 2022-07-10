@@ -1,11 +1,11 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Button, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import IRestaurante from "../../../interfaces/IRestaurante";
 
 const RestaurantsAdmin = () => {
   const [restaurants, setRestaurants] = useState<IRestaurante[]>([]);
-
 
   const getRestaurants = async () => {
     try {
@@ -34,7 +34,13 @@ const RestaurantsAdmin = () => {
               <TableCell>{restaurant.id}</TableCell>
               <TableCell>{restaurant.nome}</TableCell>
               <TableCell>
-                <Button>Edit</Button>
+                <Link
+                  underline="hover"
+                  component={RouterLink}
+                  to={`/admin/restaurants/${restaurant.id}`}
+                >
+                  Editar
+                </Link>
                 <Button color="error">Delete</Button>
               </TableCell>
             </TableRow>
