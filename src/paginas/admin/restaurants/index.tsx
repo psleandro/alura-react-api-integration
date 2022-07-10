@@ -7,6 +7,13 @@ import IRestaurante from "../../../interfaces/IRestaurante";
 const RestaurantsAdmin = () => {
   const [restaurants, setRestaurants] = useState<IRestaurante[]>([]);
 
+  const handleDeleteRestaurant = async (restaurantId: number) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/v2/restaurantes/${restaurantId}/`);
+      setRestaurants(prevRest => prevRest.filter(rest => rest.id !== restaurantId))
+    } catch (e) { }
+  }
+
   const getRestaurants = async () => {
     try {
       const { data } = await axios.get<IRestaurante[]>('http://localhost:8000/api/v2/restaurantes/');
@@ -41,7 +48,12 @@ const RestaurantsAdmin = () => {
                 >
                   Editar
                 </Link>
-                <Button color="error">Delete</Button>
+                <Button
+                  color="error"
+                  onClick={() => handleDeleteRestaurant(restaurant.id)}
+                >
+                  Delete
+                </Button>
               </TableCell>
             </TableRow>
           ))}
