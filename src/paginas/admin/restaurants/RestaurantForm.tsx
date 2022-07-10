@@ -1,8 +1,8 @@
 import { Box, Button, TextField, Typography } from "@mui/material"
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import IRestaurante from "../../../interfaces/IRestaurante";
+import { api } from "../../../services";
 
 const RestaurantForm = () => {
 
@@ -14,20 +14,20 @@ const RestaurantForm = () => {
     e.preventDefault();
     try {
       if (params.id) {
-        await axios.put(`http://localhost:8000/api/v2/restaurantes/${params.id}/`, { nome: name })
+        await api.put(`restaurantes/${params.id}/`, { nome: name })
         alert('Restaurante atualizado com sucesso!');
         return;
       }
 
-      await axios.post('http://localhost:8000/api/v2/restaurantes/', { nome: name });
+      await api.post('restaurantes/', { nome: name });
       alert('Restaurante cadastrado com sucesso!');
     } catch (e) { }
   }
 
   const getCurrentRestaurant = async (restaurantId: string) => {
     try {
-      const { data } = await axios.get<IRestaurante>(
-        `http://localhost:8000/api/v2/restaurantes/${restaurantId}/`
+      const { data } = await api.get<IRestaurante>(
+        `restaurantes/${restaurantId}/`
       );
       setName(data.nome);
     } catch (e) { }
