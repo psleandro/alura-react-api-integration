@@ -43,6 +43,7 @@ const RestaurantForm = () => {
       <Box
         component="form"
         onSubmit={handleSubmit}
+        sx={{ width: '100%' }}
       >
         <TextField
           label="Nome do restaurante"

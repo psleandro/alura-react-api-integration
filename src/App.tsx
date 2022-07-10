@@ -3,6 +3,7 @@ import Home from './paginas/Home';
 import VitrineRestaurantes from './paginas/VitrineRestaurantes';
 import RestaurantsAdmin from './paginas/admin/restaurants';
 import RestaurantForm from './paginas/admin/restaurants/RestaurantForm';
+import DefaultLayoutAdmin from './layouts/DefaultLayoutAdmin';
 
 function App() {
 
@@ -10,9 +11,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/restaurantes" element={<VitrineRestaurantes />} />
-      <Route path="/admin/restaurants" element={<RestaurantsAdmin />} />
-      <Route path="/admin/restaurants/new" element={<RestaurantForm />} />
-      <Route path="/admin/restaurants/:id" element={<RestaurantForm />} />
+
+      <Route path="/admin" element={<DefaultLayoutAdmin />}>
+        <Route path="restaurants" element={<RestaurantsAdmin />} />
+        <Route path="restaurants/new" element={<RestaurantForm />} />
+        <Route path="restaurants/:id" element={<RestaurantForm />} />
+      </Route>
     </Routes>
   );
 }
