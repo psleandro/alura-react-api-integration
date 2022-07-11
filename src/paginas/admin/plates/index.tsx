@@ -31,6 +31,7 @@ const PlatesAdmin = () => {
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
+            <TableCell>Imagem</TableCell>
             <TableCell>Nome</TableCell>
             <TableCell>Descrição</TableCell>
             <TableCell>Tag</TableCell>
@@ -41,6 +42,11 @@ const PlatesAdmin = () => {
           {plates?.map(plate => (
             <TableRow key={plate.id}>
               <TableCell>{plate.id}</TableCell>
+              <TableCell>
+                <Link href={plate.imagem} target="_blank">
+                  <img loading="lazy" height={60} src={plate.imagem} alt={`plate-${plate.nome}`} />
+                </Link>
+              </TableCell>
               <TableCell>{plate.nome}</TableCell>
               <TableCell sx={{ maxWidth: 120 }}>{plate.descricao}</TableCell>
               <TableCell>{plate.tag}</TableCell>
