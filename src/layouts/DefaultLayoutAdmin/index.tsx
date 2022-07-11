@@ -22,6 +22,16 @@ function DefaultLayoutAdmin() {
                   Novo Restaurante
                 </Button>
               </Link>
+              <Link component={RouterLink} to="/admin/plates">
+                <Button sx={{ my: 2, color: 'white' }}>
+                  Pratos
+                </Button>
+              </Link>
+              <Link component={RouterLink} to="/admin/plates/new">
+                <Button sx={{ my: 2, color: 'white' }}>
+                  Novo Prato
+                </Button>
+              </Link>
             </Box>
           </Toolbar>
         </Container>
