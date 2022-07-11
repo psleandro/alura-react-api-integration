@@ -21,6 +21,7 @@ function App() {
 
         <Route path="plates" element={<PlatesAdmin />} />
         <Route path="plates/new" element={<PlateForm />} />
+        <Route path="plates/:id" element={<PlateForm />} />
       </Route>
     </Routes>
   );
