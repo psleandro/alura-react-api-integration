@@ -1,6 +1,6 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import IPrato from "../../../interfaces/IPrato";
 import IRestaurante from "../../../interfaces/IRestaurante";
 import ITag from "../../../interfaces/ITag";
@@ -21,6 +21,16 @@ const PlateForm = () => {
   const [currentImgUrl, setCurrentImgUrl] = useState('');
 
   const params = useParams();
+  const navigate = useNavigate();
+
+  const clearStates = () => {
+    setName('');
+    setDescription('');
+    setTag('');
+    setRestaurant('');
+    setImage(null);
+    setCurrentImgUrl(defaultImg);
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,12 +53,7 @@ const PlateForm = () => {
         data: formData,
       });
 
-      setName('');
-      setDescription('');
-      setTag('');
-      setRestaurant('');
-      setImage(null);
-      setCurrentImgUrl(defaultImg);
+      clearStates();
       alert(`Prato ${params.id ? 'atualizado' : 'cadastrado'} com sucesso!`);
 
     } catch (e) {
@@ -94,11 +99,17 @@ const PlateForm = () => {
 
   useEffect(() => {
     if (params.id) getCurrentPlate(params.id);
+    if (!params.id) clearStates();
   }, [params]);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: "column", alignItems: "center", gap: 4, mt: 4 }}>
-      <Typography component="h1" variant="h6">Formulário de Pratos</Typography>
+      <Box>
+        <Button startIcon="<" variant="text" onClick={() => navigate(-1)}>
+          Voltar
+        </Button>
+        <Typography component="h1" variant="h6">Formulário de Pratos</Typography>
+      </Box>
       <Box
         component="form"
         onSubmit={handleSubmit}
